@@ -1,9 +1,13 @@
 import React, { createContext, useReducer, useEffect } from 'react';
 import { bookReducer } from '../reducers/bookReducer';
 
-export const BookContext = createContext();
+interface BookContextInterface {
 
-const BookContextProvider = (props) => {
+}
+
+export const BookContext = createContext<BookContextInterface | null>(null);
+
+const BookContextProvider = (props: any) => {
   const [books, dispatch] = useReducer(bookReducer, [], () => {
     const localData = localStorage.getItem('books');
     return localData ? JSON.parse(localData) : [];
@@ -17,5 +21,14 @@ const BookContextProvider = (props) => {
     </BookContext.Provider>
   );
 }
+
+const obj = {
+  key: "value",
+  method() {
+    return 5;
+  }
+}
+
+obj.method();
 
 export default BookContextProvider;
